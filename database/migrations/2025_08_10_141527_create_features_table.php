@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->foreignId(\App\Models\User::class);
+            //$table->foreignId(\App\Models\User::class); // Todo : org, but seems to be buggy, i added this :
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
