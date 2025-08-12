@@ -14,8 +14,7 @@ export default function Index({features}: {features: PaginatedData<Feature>}) {
     >
       <Head title="Dashboard"/>
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+
 
           {features.data.map(feature => (
 
@@ -23,8 +22,7 @@ export default function Index({features}: {features: PaginatedData<Feature>}) {
 
           ))}
 
-        </div>
-      </div>
+
     </AuthenticatedLayout>
   );
 }
