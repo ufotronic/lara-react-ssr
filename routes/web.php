@@ -35,8 +35,11 @@ Route::middleware('auth')->group(function () {
 
         })->name('dashboard');
 
-        Route::get('/feature', [FeatureController::class, 'index'])
-            ->name('feature.index');
+/*        Route::get('/feature', [FeatureController::class, 'index'])
+            ->name('feature.index');*/
+
+        // php artisan route:list; this creates all routes
+         Route::resource('feature', FeatureController::class);
 
 
 

@@ -9,6 +9,10 @@ class FeatureResource extends JsonResource
 {
     // Todo FeatureResource (DTO) is important, you do not want to expose confidential data
 
+
+    // Show.tsx does not like the wrap
+    public static $wrap = false;
+
     /**
      * Transform the resource into an array.
      *

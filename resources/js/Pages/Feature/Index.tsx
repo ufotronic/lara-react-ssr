@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import {Feature, PaginatedData} from "@/types";
 import FeatureItem from "@/Components/FeatureItem";
 
@@ -12,13 +12,21 @@ export default function Index({features}: {features: PaginatedData<Feature>}) {
         </h2>
       }
     >
-      <Head title="Dashboard"/>
+      <Head title="Features"/>
+
+      <div className="mb-8">
+        <Link href={route('feature.create')} className="inline-flex items-center" >
+
+          Create new Feature
+
+        </Link>
+      </div>
 
 
 
           {features.data.map(feature => (
 
-            <FeatureItem feature={feature} />
+            <FeatureItem feature={feature} key={feature.id}/>
 
           ))}
 
