@@ -8,7 +8,7 @@ import {
 export default forwardRef(function TextAreaInput(
   {
     className = '',
-    rows = 6,
+    rows = 2,
     ...props
   }: InputHTMLAttributes<HTMLTextAreaElement> & { rows: number },
   ref,

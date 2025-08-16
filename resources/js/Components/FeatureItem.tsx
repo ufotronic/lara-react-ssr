@@ -1,7 +1,7 @@
 import {Feature} from "@/types";
 import {useState} from "react";
 import {Link} from "@inertiajs/react";
-//import FeatureActionsDropdown from "@/Components/FeatureActionsDropdown";
+import FeatureActionsDropdown from "@/Components/FeatureActionsDropdown";
 //import FeatureUpvoteDownvote from "@/Components/FeatureUpvoteDownvote";
 
 export default function FeatureItem({feature}: {feature: Feature}) {
@@ -42,7 +42,7 @@ export default function FeatureItem({feature}: {feature: Feature}) {
           </div>
         </div>
         <div>
-          {/*<FeatureActionsDropdown feature={feature} />*/}
+          <FeatureActionsDropdown feature={feature} />
         </div>
       </div>
     </div>
