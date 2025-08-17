@@ -2,6 +2,7 @@ import {Feature} from "@/types";
 import {useState} from "react";
 import {Link} from "@inertiajs/react";
 import FeatureActionsDropdown from "@/Components/FeatureActionsDropdown";
+import FeatureUpvoteDownvote from "@/Components/FeatureUpvoteDownvote";
 //import FeatureUpvoteDownvote from "@/Components/FeatureUpvoteDownvote";
 
 export default function FeatureItem({feature}: {feature: Feature}) {
@@ -14,7 +15,12 @@ export default function FeatureItem({feature}: {feature: Feature}) {
   return (
     <div className="mb-4 overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
       <div className="p-6 text-gray-900 dark:text-gray-100 flex gap-8">
-        {/*<FeatureUpvoteDownvote feature={feature} />*/}
+        <FeatureUpvoteDownvote feature={feature} />
+{/*        <div className={feature.user_has_upvoted ? 'text-amber-500' : ''}>
+          <span className="text-2xl font-semibold">
+            {feature.upvote_count}
+          </span>
+        </div>*/}
         <div className="flex-1">
           <h2 className="text-2xl mb-2">
             <Link prefetch href={route('feature.show', feature)}>

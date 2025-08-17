@@ -14,7 +14,7 @@ class Feature extends Model
     protected $fillable = ['name', 'description', 'user_id'];
 
 
-    public function upvote(): HasMany{
+    public function upvotes(): HasMany{
 
         return $this->hasMany(Upvote::class);
     }
