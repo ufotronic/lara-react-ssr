@@ -5,9 +5,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FeatureResource extends JsonResource
+class FeatureListResource extends JsonResource
 {
-    // Todo FeatureResource (DTO) is important, you do not want to expose confidential data
+    // Todo FeatureListResource (DTO) is important, you do not want to expose confidential data
 
 
     // Show.tsx does not like the wrap
@@ -33,14 +33,6 @@ class FeatureResource extends JsonResource
             'upvote_count' => $this->upvote_count ?: 0,
             'user_has_upvoted' => (boolean)$this->user_has_upvoted,
             'user_has_downvoted' => (boolean)$this->user_has_downvoted,
-            'comments' => $this->comments->map(function ($comment) {
-                return [
-                    'id' => $comment->id,
-                    'comment' => $comment->comment,
-                    'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
-                    'user' => new UserResource($comment->user)
-                ];
-            })
         ];
     }
 }
