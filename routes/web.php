@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\PermissionsEnum;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ProfileController;
@@ -41,7 +42,15 @@ Route::middleware('auth')->group(function () {
             ->name('feature.index');*/
 
         // php artisan route:list; this creates all routes
-         Route::resource('feature', FeatureController::class);
+         Route::resource('feature', FeatureController::class)
+             ->except(['index','show'])
+             ->middleware('can:' . PermissionsEnum::ManageFeatures->value);
+
+         Route::get('/feature', [FeatureController::class, 'index'])
+             ->name('feature.index');
+
+        Route::get('/feature/{feature}', [FeatureController::class, 'show'])
+            ->name('feature.show');
 
          Route::post('/feature/{feature}/upvote', [UpvoteController::class, 'store'])
              -> name('upvote.store');
@@ -51,10 +60,12 @@ Route::middleware('auth')->group(function () {
 
 
         Route::post('/feature/{feature}/comments', [CommentController::class, 'store'])
-            -> name('comment.store');
+            -> name('comment.store')
+            -> middleware('can:' . PermissionsEnum::ManageComments->value);
 
         Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])
-            -> name('comment.destroy');
+            -> name('comment.destroy')
+            -> middleware('can:' . PermissionsEnum::ManageComments->value);
 
 
 

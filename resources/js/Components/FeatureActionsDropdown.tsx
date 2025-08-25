@@ -1,10 +1,17 @@
 import Dropdown from "@/Components/Dropdown";
-import {Feature} from "@/types";
-//import {can} from "@/helpers";
+import {Feature, User} from "@/types";
 import {usePage} from "@inertiajs/react";
+import {can} from "@/helpers";
 
 
 export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
+
+  const user:User = usePage().props.auth.user;
+
+  if (!can(user, 'manage_features')) {
+    return;
+  }
+
   return (
     <Dropdown>
       <Dropdown.Trigger>
@@ -23,18 +30,20 @@ export default function FeatureActionsDropdown({feature}: {feature: Feature}) {
       </Dropdown.Trigger>
 
       <Dropdown.Content>
+
         <Dropdown.Link
-          href={route('feature.edit', feature.id)}
-        >
+          href={route('feature.edit', feature.id)}>
           Edit Feature
         </Dropdown.Link>
+
+
         <Dropdown.Link
           href={route('feature.destroy', feature.id)}
           method="delete"
-          as="button"
-        >
+          as="button">
           Delete Feature
         </Dropdown.Link>
+
       </Dropdown.Content>
     </Dropdown>
   );

@@ -1,9 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, Link} from '@inertiajs/react';
-import {Feature, PaginatedData} from "@/types";
+import {Feature, PageProps, PaginatedData} from "@/types";
 import FeatureItem from "@/Components/FeatureItem";
+import {can} from "@/helpers";
 
-export default function Index({features}: {features: PaginatedData<Feature>}) {
+export default function Index({auth,features}: PageProps<{features: PaginatedData<Feature>}>) {
   return (
     <AuthenticatedLayout
       header={
@@ -14,13 +15,13 @@ export default function Index({features}: {features: PaginatedData<Feature>}) {
     >
       <Head title="Features"/>
 
-      <div className="mb-8">
+      {can(auth.user, 'manage_features') && <div className="mb-8">
         <Link href={route('feature.create')} className="inline-flex items-center" >
 
           Create new Feature
 
         </Link>
-      </div>
+      </div>}
 
 
 

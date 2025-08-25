@@ -1,11 +1,14 @@
-import {Feature} from "@/types";
+import {Feature, User} from "@/types";
 import TextAreaInput from "@/Components/TextAreaInput";
 import {useForm, usePage} from "@inertiajs/react";
 import {FormEventHandler} from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import {can} from "@/helpers";
 
 
 export default function NewCommentForm({feature}: {feature: Feature}) {
+
+  const user:User = usePage().props.auth.user;
 
 
   const {
@@ -27,6 +30,13 @@ export default function NewCommentForm({feature}: {feature: Feature}) {
     })
   }
 
+  if (!can(user, 'manage_comments')){
+    return (
+      <div className="text-center text-gray-600">
+        You don't have permission to leave comments
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={createComment} className="flex items-center py-2 rounded-lg bg-gray-50 dark:bg-gray-800 mb-4">

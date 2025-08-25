@@ -1,7 +1,10 @@
-import {Comment} from "@/types";
-import {useForm} from "@inertiajs/react";
+import {Comment, User} from "@/types";
+import {useForm, usePage} from "@inertiajs/react";
+import {can} from "@/helpers";
 
 export default function CommentItem({comment} : {comment: Comment}) {
+
+  const user:User = usePage().props.auth.user;
 
 
   const form = useForm();
@@ -29,6 +32,8 @@ export default function CommentItem({comment} : {comment: Comment}) {
         <div className="italic mt-1">{comment.comment}</div>
       </div>
 
+
+      {can(user,'manage_comments')  && comment.user.id == user.id  &&  <div className="flex items-center py-2 px-6">
         <button onClick={deleteComment}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                stroke="currentColor" className="size-4">
@@ -37,6 +42,7 @@ export default function CommentItem({comment} : {comment: Comment}) {
           </svg>
 
         </button>
+      </div>}
 
     </div>
   );
