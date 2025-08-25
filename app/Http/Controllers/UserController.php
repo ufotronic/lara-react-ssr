@@ -44,7 +44,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'roles' => ['required', 'array'],
+        ]);
+
+        $user->syncRoles($data['roles']);
+
+        return back()->with('success', 'Roles updated successfully.');
     }
 
 }
